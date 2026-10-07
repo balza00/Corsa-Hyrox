@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luca Balzarotti – Programma corsa</title>
+<style>
+:root{--bg:#f2f2f7;--card:#fff;--ink:#1c1c1e;--mut:#8e8e93;--line:rgba(60,60,67,.14);--g:#34c759;--gd:#248a3d;--gl:rgba(52,199,89,.15);--fill:rgba(118,118,128,.12);--bar:rgba(242,242,247,.8);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--card:#1c1c1e;--ink:#fff;--mut:#98989d;--line:rgba(84,84,88,.5);--gl:rgba(52,199,89,.2);--fill:rgba(118,118,128,.28);--bar:rgba(0,0,0,.7)}}
+:root[data-theme="dark"]{--bg:#000;--card:#1c1c1e;--ink:#fff;--mut:#98989d;--line:rgba(84,84,88,.5);--gl:rgba(52,199,89,.2);--fill:rgba(118,118,128,.28);--bar:rgba(0,0,0,.7)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",system-ui,sans-serif;font-size:17px;line-height:1.35;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:12px 16px}
+.hero{background:none;color:var(--ink);padding:28px 4px 4px}
+.hero small{color:var(--g);letter-spacing:.02em;text-transform:none;font-weight:600;font-size:15px}
+.hero h1{margin:2px 0 2px;font-size:36px;font-weight:700;letter-spacing:-.03em}
+.hero p{margin:0;color:var(--mut);font-size:17px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.stat{background:var(--card);border-radius:20px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.stat b{display:block;font-size:28px;font-weight:700;letter-spacing:-.02em;color:var(--g)}.stat span{font-size:12px;color:var(--mut)}
+h2{font-size:22px;letter-spacing:-.02em;color:var(--ink);margin:30px 4px 10px;font-weight:700;text-transform:none}
+.zones{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.zone{flex:0 0 140px;background:var(--card);border:0;border-radius:20px;padding:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.zone b{font-size:13px;color:var(--c);font-weight:600}.zone .p{font-size:20px;font-weight:700;letter-spacing:-.02em;margin:6px 0 2px}.zone small{color:var(--mut);font-size:13px;display:block}
+.tabs{display:flex;gap:2px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 6px);background:var(--fill);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:2px;border-radius:12px;z-index:5;margin:0 0 14px}
+.tab{flex:1;border:0;background:transparent;color:var(--ink);border-radius:10px;padding:7px 4px;font:600 14px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.tab.on{background:var(--card);box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.wk{display:flex;justify-content:space-between;align-items:center;margin:4px 4px 12px}
+.wk b{font-size:20px;letter-spacing:-.02em}.chip{background:var(--gl);color:var(--gd);border-radius:999px;padding:5px 12px;font-weight:600;font-size:13px}
+@media (prefers-color-scheme:dark){.chip{color:#30d158}}
+.s{background:var(--card);border:0;border-radius:22px;padding:18px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:opacity .25s}
+.s.done{opacity:.55}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.day{font-size:13px;color:var(--mut);font-weight:600}
+.s h3{margin:2px 0 0;font-size:21px;font-weight:700;letter-spacing:-.02em}
+.zc{background:var(--c);color:#fff;border-radius:999px;padding:4px 11px;font-weight:700;font-size:13px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 12px}
+.m{background:var(--fill);border-radius:999px;padding:5px 11px;font-size:14px}.m b{font-weight:700}
+.st{margin:0 0 6px;font-size:16px}.nt{color:var(--mut);font-size:14px;margin:0 0 6px}
+.act{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:12px;border-top:1px solid var(--line);padding-top:14px;font-size:16px}
+.ck{display:flex;align-items:center;gap:10px;font-weight:500;cursor:pointer}
+.ck input{appearance:none;-webkit-appearance:none;width:51px;height:31px;border-radius:999px;background:var(--fill);position:relative;transition:background .25s;margin:0;cursor:pointer}
+.ck input::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .25s}
+.ck input:checked{background:var(--g)}.ck input:checked::after{transform:translateX(20px)}
+select{font:500 16px -apple-system,BlinkMacSystemFont,system-ui,sans-serif;border:0;background:var(--fill);color:var(--ink);border-radius:10px;padding:7px 10px}
+.send{display:block;text-align:center;background:var(--g);color:#fff;text-decoration:none;font-weight:600;font-size:17px;border-radius:16px;padding:16px;margin:22px 0 10px}
+.foot{color:var(--mut);font-size:13px;text-align:center;margin:8px 0 28px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <small>Programma corsa</small>
+    <h1>Luca Balzarotti</h1>
+    <p>Mese 1 · Base e adattamento</p>
+    <div class="stats">
+      <div class="stat"><b id="cd">–</b><span>giorni alla gara</span></div>
+      <div class="stat"><b>3:30</b><span>ritmo test 2 km</span></div>
+      <div class="stat"><b id="pct">0%</b><span>completato</span></div>
+    </div>
+  </div>
+
+  <h2>Le tue zone</h2>
+  <div class="zones" id="zones"></div>
+
+  <h2>Allenamenti</h2>
+  <div class="tabs" id="tabs"></div>
+  <div id="week"></div>
+
+  <a class="send" id="send" href="#" target="_blank" rel="noopener">Invia il feedback al coach su WhatsApp</a>
+  <p class="foot">Le spunte si salvano su questo dispositivo. Il feedback parte dal pulsante qui sopra.</p>
+</div>
+
+<script>
+var START=new Date(2026,9,12), RACE=new Date(2027,0,31);
+var ZONES={Z1:["Recupero","5:04–5:46","111–130","2–3","#8e8e93"],Z2:["Facile","4:33–5:04","130–148","3–4","#34c759"],Z3:["Ritmo gara","4:07–4:33","148–161","5–6","#e6a700"],Z4:["Soglia","3:46–4:07","161–170","7","#ff9500"],Z5:["VO2max","3:30–3:46","170–179","8–9","#ff3b30"],Z6:["Veloce","3:13–3:30","179–185","9–10","#af52de"]};
+var OFF={Lun:0,Mer:2,Ven:4,Dom:6};
+var W=[
+{f:"Base",s:[
+["Lun","Corsa facile continua","Z2","35' continui a ritmo conversazione",7,"Settimana di adattamento: se il volume è alto per te, accorcia."],
+["Mer","Fartlek","Z4","Risc. 15' Z2 + 6 × (1' Z4 / 2' Z2) + def. 10' Z1",9,""],
+["Ven","Progressivo","Z3","40': 20' Z2 + 10' Z2 alto + 10' Z3",8,""],
+["Dom","Lungo lento","Z2","60' Z2 costanti",12,"Idratazione ogni 20'."]]},
+{f:"Base",s:[
+["Lun","Corsa facile continua","Z2","40' a ritmo conversazione",8,""],
+["Mer","Soglia a intervalli","Z4","Risc. 15' Z2 + 4 × 5' Z4 rec 1' trotto + def. 10' Z1",10.5,"Ritmo costante su tutte le ripetute."],
+["Ven","Progressivo","Z3","45': 25' Z2 + 10' Z2 alto + 10' Z3",9,""],
+["Dom","Lungo lento","Z2","70' Z2",14,""]]},
+{f:"Base",s:[
+["Lun","Corsa facile continua","Z2","45' a ritmo conversazione",9,""],
+["Mer","Intervalli VO2max lunghi","Z5","Risc. 15' Z2 + 5 × 3' Z5 rec 2' trotto + def. 10' Z1",10.5,"Ultima ripetuta uguale alla prima."],
+["Ven","Tempo run","Z4","Risc. 15' Z2 + 20' Z4 + def. 10' Z1",10,""],
+["Dom","Lungo lento","Z2","80' Z2",16,""]]},
+{f:"Scarico",s:[
+["Lun","Corsa facile continua","Z2","35' facili",7,"Settimana di scarico."],
+["Mer","Fartlek","Z4","Risc. 15' Z2 + 5 × (1' Z4 / 2' Z2) + def. 10' Z1",8.5,""],
+["Ven","Allunghi","Z6","30' Z2 + 6 × 20'' veloci rec 60'' camminata",7,""],
+["Dom","Lungo lento","Z2","60' Z2",12,""]]}
+];
+var cur=0, S={};
+try{S=JSON.parse(localStorage.getItem("luca-corsa")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("luca-corsa",JSON.stringify(S))}catch(e){}}
+function fmt(d){return d.toLocaleDateString("it-IT",{day:"numeric",month:"short"})}
+function key(w,i){return w+"-"+i}
+
+document.getElementById("zones").innerHTML=Object.keys(ZONES).map(function(k){var z=ZONES[k];
+return '<div class="zone" style="--c:'+z[4]+'"><b>'+k+' · '+z[0]+'</b><div class="p">'+z[1]+'</div><small>'+z[2]+' bpm</small><small>RPE '+z[3]+'</small></div>'}).join("");
+
+document.getElementById("cd").textContent=Math.max(0,Math.ceil((RACE-new Date())/864e5));
+
+function tabs(){document.getElementById("tabs").innerHTML=W.map(function(w,i){return '<button class="tab'+(i==cur?' on':'')+'" data-i="'+i+'">Sett. '+(i+1)+'</button>'}).join("")}
+function render(){
+ var w=W[cur],km=0,html="";
+ w.s.forEach(function(x,i){km+=x[4];var z=ZONES[x[2]],k=key(cur,i),st=S[k]||{},d=new Date(START.getTime());d.setDate(d.getDate()+cur*7+OFF[x[0]]);
+ html+='<div class="s'+(st.d?' done':'')+'" style="--c:'+z[4]+'"><div class="top"><div><div class="day">'+x[0]+' '+fmt(d)+'</div><h3>'+x[1]+'</h3></div><span class="zc">'+x[2]+'</span></div>'+
+ '<div class="meta"><span class="m">Ritmo <b>'+z[1]+'</b></span><span class="m">FC <b>'+z[2]+'</b></span><span class="m">RPE <b>'+z[3]+'</b></span><span class="m"><b>'+x[4]+'</b> km</span></div>'+
+ '<p class="st">'+x[3]+'</p>'+(x[5]?'<p class="nt">'+x[5]+'</p>':'')+
+ '<div class="act"><label class="ck"><input type="checkbox" data-k="'+k+'" '+(st.d?'checked':'')+'> Fatto</label><label>RPE percepito <select data-r="'+k+'"><option value="">–</option>'+[1,2,3,4,5,6,7,8,9,10].map(function(n){return '<option'+(st.r==n?' selected':'')+'>'+n+'</option>'}).join("")+'</select></label></div></div>'});
+ document.getElementById("week").innerHTML='<div class="wk"><b>Settimana '+(cur+1)+' · '+w.f+'</b><span class="chip">'+km+' km</span></div>'+html;
+ stats();
+}
+function stats(){var t=0,d=0;W.forEach(function(w,a){w.s.forEach(function(x,i){t++;if((S[key(a,i)]||{}).d)d++})});
+ document.getElementById("pct").textContent=Math.round(d/t*100)+"%";
+ var lines=["Feedback "+"Luca Balzarotti – mese 1"];
+ W.forEach(function(w,a){w.s.forEach(function(x,i){var st=S[key(a,i)]||{};if(st.d||st.r)lines.push("S"+(a+1)+" "+x[0]+" "+x[1]+": "+(st.d?"fatto":"non fatto")+(st.r?", RPE "+st.r:""))})});
+ lines.push("Completato: "+d+"/"+t);
+ document.getElementById("send").href="https://wa.me/?text="+encodeURIComponent(lines.join("\n"))}
+document.addEventListener("change",function(e){var t=e.target;
+ if(t.dataset.k){S[t.dataset.k]=S[t.dataset.k]||{};S[t.dataset.k].d=t.checked;save();render()}
+ if(t.dataset.r){S[t.dataset.r]=S[t.dataset.r]||{};S[t.dataset.r].r=t.value;save();stats()}});
+document.addEventListener("click",function(e){if(e.target.classList.contains("tab")){cur=+e.target.dataset.i;tabs();render()}});
+tabs();render();
+</script>
+</body>
+</html>
